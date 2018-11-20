@@ -1,9 +1,9 @@
 /*----------------------------------------------------------
 *				HTBLA-Leonding / Klasse: <your class>
 * ---------------------------------------------------------
-* Exercise Number: 0
+* Exercise Number: 8
 * Title:			car.h
-* Author:			P. Bauer
+* Author:			D.Andricic
 * Due Date:		20.November, 2018
 * ----------------------------------------------------------
 * Description:
