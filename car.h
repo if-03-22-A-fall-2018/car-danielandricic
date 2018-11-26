@@ -30,9 +30,9 @@ enum CarType get_type(Car car);
 enum Color get_color(Car car);
 float get_fill_level(Car car);
 float get_acceleration_rate(Car car);
-double get_speed(Car car);
+int get_speed(Car car);
 Car get_car(enum CarType);
-void set_acceleration_rate(Car car, int accelleration);
+void set_acceleration_rate(Car car, double accelleration);
 void init();
 void accelerate(Car car);
 #endif

@@ -6,7 +6,7 @@ struct CarImplementation{
   enum CarType carType;
   enum Color color;
   int actualspeed;
-  int accelleration;
+  double accelleration;
   double fill_level;
   bool is_rented;
 };
@@ -33,7 +33,7 @@ enum Color get_color(Car car)
 
 float get_fill_level(Car car)
 {
-  return 0.0;
+  return car->fill_level;
 }
 
 float get_acceleration_rate(Car car)
@@ -41,33 +41,62 @@ float get_acceleration_rate(Car car)
   return car->accelleration;
 }
 
-double get_speed(Car car)
+int get_speed(Car car)
 {
   return car->actualspeed;
 }
-
 Car get_car(enum CarType type)
 {
     for (int i = 0; i < CARCOUNT; i++) {
-      if(car_park[i]->carType == type && !car_park[i]->is_rented)
+      if(car_park[i]->carType == type && !(car_park[i]->is_rented))
       {
+          car_park[i]->is_rented = true;
           return car_park[i];
       }
     }
     return 0;
 }
 
-void set_acceleration_rate(Car car, int accelleration)
+void set_acceleration_rate(Car car, double accelleration)
 {
+  if(accelleration < -8.0000)
+  {
+    accelleration = -8.0000;
+  }
+  switch(car->carType) // Primitive Lösung
+  {
+    case AIXAM:
+    if(accelleration > 1.0)
+    {
+      accelleration = 1.0;
+    }
+    break;
+    case FIAT_MULTIPLA:
+    if(accelleration > 2.26)
+    {
+      accelleration = 2.26;
+    }
+    break;
+    case JEEP:
+    if(accelleration > 3.14)
+    {
+      accelleration = 3.14;
+    }
+    break;
+  }
   car->accelleration = accelleration;
 }
 
 void init()
 {
-
+  for (int i = 0; i < CARCOUNT; i++) {
+    set_acceleration_rate(car_park[i], 0.0);
+    car_park[i]->is_rented = false;
+  }
 }
 
 void accelerate(Car car)
 {
   car->actualspeed += car->accelleration;
+  car->actualspeed = (int) ((car->actualspeed * 3.6) * 100) % 100;
 }
